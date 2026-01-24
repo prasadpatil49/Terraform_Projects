@@ -1,12 +1,3 @@
-# This is a provider file for AWS emulator localstack
-terraform {
-    required_providers {
-        aws = {
-            source  = "hashicorp/aws"
-            version = "~> 6.0"
-        }
-  }
-  }
 provider "aws" {
     access_key                  = "test"
     secret_key                  = "test"
