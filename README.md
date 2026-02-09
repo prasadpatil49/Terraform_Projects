@@ -1,6 +1,10 @@
 # Terraform_Samples
 Terraform Samples and Exercises 
 
+These projects are for learning purposes and are not production ready. Tested with LocalStack.
+Check the README.md file in each project for more information. 
+
+
 # Projects
 
 

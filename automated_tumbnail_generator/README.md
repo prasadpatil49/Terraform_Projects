@@ -4,7 +4,7 @@
 
 This project is a simple automated thumbnail generator that uses Python, AWS Lambda, and S3 to generate thumbnails of images uploaded to an S3 bucket.
 
-As soon as an image is uploaded to the S3 bucket/images folder, the AWS Lambda Function is triggered to generate a thumbnail of the image and store it in the S3 bucket/thumbnails folder.
+As soon as an image is uploaded to the S3 bucket/images folder, the AWS Lambda Function is triggered to generate a thumbnail (just rename) of the image and store it in the S3 bucket/thumbnails folder.
 
 ## Features
 
