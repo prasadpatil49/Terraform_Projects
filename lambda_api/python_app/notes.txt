@@ -1,0 +1,6 @@
+curl -X POST -H "Content-Type: application/json" -d '{"id": "1", "name": "John Doe"}' http://4mntld1dv4ykin8j0mhytslsz1pb07xy.lambda-url.us-east-1.localhost.localstack.cloud:4566/users
+
+
+
+
+LATEST_STREAM=$(awslocal logs describe-log-streams --log-group-name /aws/lambda/lambda-api-dev-lambda --order-by LastEventTime --descending --limit 1 --query 'logStreams[0].logStreamName' --output text); awslocal logs get-log-events   --log-group-name "/aws/lambda/lambda-api-dev-lambda"   --log-stream-name "$LATEST_STREAM"
