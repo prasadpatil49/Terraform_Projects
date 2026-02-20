@@ -43,6 +43,7 @@ terraform.rc
 # Uncomment the line below if you want to ignore planout files.
 # planout
 
-# ignore local AWS credentials profile
+# ignore local AWS credentials profile and account setup code
 
 .aws_profile
+account_setup
