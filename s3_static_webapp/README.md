@@ -11,5 +11,3 @@ This project is a simple AWS project to deploy static website on S3.
 3. S3 Bucket Website Configuration (Setting up the website configuration for the S3 bucket)
 4. S3 Bucket Object (Copying source files to S3 bucket)
 
-
-Note: Tested with LocalStack.

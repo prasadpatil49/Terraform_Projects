@@ -10,6 +10,7 @@ data "aws_iam_policy_document" "application_lambda_role" {
 
 data "aws_iam_policy_document" "lambda_dynamodb_policy" {
   statement {
+    sid= "AllowDynamoDBAccess"
     effect = "Allow"
     actions = [
       "dynamodb:PutItem",
@@ -22,6 +23,18 @@ data "aws_iam_policy_document" "lambda_dynamodb_policy" {
     resources = [
       aws_dynamodb_table.application_table.arn
     ]
+  }
+  statement {
+    sid= "AllowLambdaLogging"
+    effect = "Allow"
+    actions = [ 
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+     ]
+    resources = [ 
+      "arn:aws:logs:*:*:*"
+     ]
   }
 }
 
@@ -42,6 +55,7 @@ resource "aws_lambda_function" "application_lambda" {
   handler = "main.handler"
   runtime = "python3.11"
   filename = "python_app.zip"
+  layers = [ "arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:47" ]
   role = aws_iam_role.application_lambda_role.arn
   tags = {
     Name = "${var.application_name}-${var.environment}-lambda"

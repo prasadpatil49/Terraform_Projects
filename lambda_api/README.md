@@ -3,6 +3,9 @@
 ## Description
 
 This project is a simple AWS project to implement a backend API's using Lambda and API Gateway.
+simple api endpoints.
+
+use api gateway "endpoint/hello" to test
 
 ## Components
 

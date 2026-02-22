@@ -4,30 +4,38 @@ resource "aws_s3_bucket" "s3_bucket" {
 }
 
 
-
-resource "aws_s3_bucket_ownership_controls" "s3_bucket_ownership_controls" {
-    bucket = aws_s3_bucket.s3_bucket.id
-    rule {
-        object_ownership = "BucketOwnerPreferred"
-    }
-}
-
 resource "aws_s3_bucket_public_access_block" "s3_bucket_public_access_block" {
     bucket = aws_s3_bucket.s3_bucket.id
-    block_public_acls = false
+    block_public_acls = true
     block_public_policy = false
-    ignore_public_acls = false
+    ignore_public_acls = true
     restrict_public_buckets = false
 }
 
+data "aws_iam_policy_document" "allow_read_access_all" {
+  
+  statement {
 
-resource "aws_s3_bucket_acl" "s3_bucket_acl" {
-    depends_on = [ aws_s3_bucket_ownership_controls.s3_bucket_ownership_controls,
-    aws_s3_bucket_public_access_block.s3_bucket_public_access_block ]
-    bucket = aws_s3_bucket.s3_bucket.id
-    acl = "public-read"
+    sid    = "PublicReadGetObject"
+    effect = "Allow"
+    principals {
+      type = "*"
+      identifiers = [ "*" ]
+    }
+    actions = [
+      "s3:GetObject"
+    ]
+    resources = [
+      "${aws_s3_bucket.s3_bucket.arn}/*"
+    ]
+  }
 }
 
+resource "aws_s3_bucket_policy" "bucket_readall_policy" {
+    bucket = aws_s3_bucket.s3_bucket.id
+    policy = data.aws_iam_policy_document.allow_read_access_all.json
+    depends_on = [ aws_s3_bucket_public_access_block.s3_bucket_public_access_block ]
+}
 
 resource "aws_s3_bucket_versioning" "s3_bucket_versioning" {
     bucket = aws_s3_bucket.s3_bucket.id
